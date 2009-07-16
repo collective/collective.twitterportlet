@@ -34,6 +34,9 @@ class Assignment(base.Assignment):
         self.username = username
         self.count = 5
 
+    @property
+    def title(self):
+        return _(u"Twitter")
 
 class Renderer(base.Renderer):
     """Portlet renderer"""
