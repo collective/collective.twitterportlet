@@ -8,8 +8,7 @@
         <span class="portletTopRight"></span>
     </dt>
     
-    <tal:block condition="python: len(tweets) > 0">
-
+    <tal:block tal:condition="tweets|nothing">
       <tal:tweets tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime"
                   tal:repeat="obj tweets">
         <dd class="portletItem" tal:define="oddrow repeat/obj/odd"
@@ -22,10 +21,9 @@
           </span>
         </dd>
       </tal:tweets>
-    
   </tal:block>
   
-  <tal:block condition="python: len(tweets) == 0">
+  <tal:block tal:condition="not: tweets|nothing">
     <dd class="portletItem odd">
       There was a problem retrieving the twitter updates.
     </dd>
