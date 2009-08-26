@@ -49,14 +49,17 @@ class Renderer(base.Renderer):
     
     @property
     def available(self):
-        return len(self.get_tweets())
+        return True
     
     @memoize
     def get_tweets(self):
         username = self.data.username
         limit = self.data.count
         twapi = twitter.Api()
-        return twapi.GetUserTimeline(username)[:limit]
+        try:
+            return twapi.GetUserTimeline(username)[:limit]
+        except:
+            return []
 
 
 class AddForm(base.AddForm):
