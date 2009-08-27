@@ -77,13 +77,6 @@ class Renderer(base.Renderer):
         str = re.sub(self.atRegexp, '<a href="http://twitter.com/\g<1>">@\g<1></a>', str) 
         return str
     
-    # Expand urls, #tags and @names with HTML anchors
-    def expand2(self, str):
-        str = re.sub(urlsRegexp, '<a href="\g<1>">\g<1></a>', str)
-        str = re.sub(hashRegexp, '<a href="http://twitter.com/search?q=%23\g<1>">#\g<1></a>', str)
-        str = re.sub(atRegexp, '<a href="http://twitter.com/\g<1>">@\g<1></a>', str) 
-        return str
-    
     @memoize
     def get_tweets(self):
         username = self.data.username
