@@ -1,23 +1,35 @@
 Changelog
 =========
 
-0.1
+0.5
 ----------------
 
-* Initial Release
+* Portlet displays the error message if there is a problem accessing the API.
+  (Ben Mason - @sparcd)
 
-0.2
-----------------
-
-* Problems with the egg, so repackaged and re-released
-
-0.3
-----------------
-
-* General bug fixes
+* Links are now hyperlinked using regex.
+  (Ben Glynn - @Open_Comms)
 
 0.4
 ----------------
 
 * General bug fixes
+  (Ben Mason - @sparcd)
 
+0.3
+----------------
+
+* General bug fixes
+  (Ben Mason - @sparcd) 
+
+0.2
+----------------
+
+* Problems with the egg, so repackaged and re-released
+  (Ben Mason - @sparcd)
+
+0.1
+----------------
+
+* Initial Release
+  (Ben Mason - @sparcd)
