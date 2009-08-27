@@ -13,7 +13,7 @@
                   tal:repeat="obj tweets">
         <dd class="portletItem" tal:define="oddrow repeat/obj/odd"
           tal:attributes="class python:oddrow and 'portletItem even' or 'portletItem odd'">
-          <tal:block replace="obj/text" />
+          <tal:block replace="structure python:view.expand(obj.text)" />
           <span class="portletItemDetails">
             <tal:date content="python:toLocalizedTime(obj.created_at, long_format=1)">
               May 5
