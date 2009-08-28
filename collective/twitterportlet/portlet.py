@@ -9,36 +9,48 @@ from plone.memoize.instance import memoize
 import twitter
 import re
 
-
 # Match and capture urls
 urlsRegexp = re.compile(r"""
     (
-    http://                 # Protocol
-    [A-Za-z0-9\-/.]*        # Alphanumeric, dash, slash or dot
-    [A-Za-z0-9\-/]+         # Don't end with a dot
+    # Protocol
+    http://
+    # Alphanumeric, dash, slash or dot
+    [A-Za-z0-9\-/.]*
+    # Don't end with a dot
+    [A-Za-z0-9\-/]+
     )
     """, re.VERBOSE)
 
 # Match and capture #tags
 hashRegexp = re.compile(r"""
-        \#([A-Za-z0-9\-]+)  # Hash followed by at least one alphanumeric or dash
-        """, re.VERBOSE)
+    # Hash at start of string or after space, followed by at least one 
+    # alphanumeric or dash
+    (?:^|(?<=\s))\#([A-Za-z0-9\-]+)
+    """, re.VERBOSE)
 
 # Match and capture @names
 atRegexp = re.compile(r"""
-        @([A-Za-z0-9\-]+)   # At symbol followed by at least one alphanumeric or dash
-        """, re.VERBOSE)
+    # At symbol at start of string or after space, followed by at least one 
+    # alphanumeric or dash
+    (?:^|(?<=\s))@([A-Za-z0-9\-]+)
+    """, re.VERBOSE)
+
+# Match and capture email address
+emailRegexp = re.compile(r"""
+    # Email at start of string or after space
+    (?:^|(?<=\s))([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4})\b
+    """, re.VERBOSE|re.IGNORECASE)
         
 
 def expand_tweet(str):
     """This method takes a string, parses it for URLs, hashtags and mentions
-       and returns a hyperlinked string.
-    """
+       and returns a hyperlinked string."""
+       
     str = re.sub(urlsRegexp, '<a href="\g<1>">\g<1></a>', str)
     str = re.sub(hashRegexp, '<a href="http://twitter.com/search?q=%23\g<1>">#\g<1></a>', str)
     str = re.sub(atRegexp, '<a href="http://twitter.com/\g<1>">@\g<1></a>', str) 
+    str = re.sub(emailRegexp, '<a href="mailto:\g<1>">\g<1></a>', str) 
     return str
-        
 
 class ITwitterPortlet(IPortletDataProvider):
     """A twitter portlet"""
@@ -98,6 +110,7 @@ class Renderer(base.Renderer):
 
 class AddForm(base.AddForm):
     """Portlet add form"""
+    
     form_fields = form.Fields(ITwitterPortlet)
 
     def create(self, data):
@@ -106,4 +119,5 @@ class AddForm(base.AddForm):
 
 class EditForm(base.EditForm):
     """Portlet edit form"""
+    
     form_fields = form.Fields(ITwitterPortlet)
