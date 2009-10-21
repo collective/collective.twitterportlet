@@ -4,6 +4,10 @@ Changelog
 0.5
 ----------------
 
+* Added z3c.autoinclude.plugin entry point, so in Plone 3.3+ you can avoid
+  loading the ZCML file.
+  (Hanno Schlichting - @hannosch)
+
 * Portlet displays the error message if there is a problem accessing the API.
   (Ben Mason - @sparcd)
 
