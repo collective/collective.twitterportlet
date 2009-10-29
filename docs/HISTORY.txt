@@ -4,6 +4,10 @@ Changelog
 0.5
 ----------------
 
+* Changed the limit option to push it through to the API rather than 
+  retrieving all and then slicing
+  (Ben Mason - @sparcd)
+
 * Added z3c.autoinclude.plugin entry point, so in Plone 3.3+ you can avoid
   loading the ZCML file.
   (Hanno Schlichting - @hannosch)

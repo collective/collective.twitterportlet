@@ -55,16 +55,22 @@ def expand_tweet(str):
 class ITwitterPortlet(IPortletDataProvider):
     """A twitter portlet"""
 
-    name = schema.TextLine(title=_(u"Title"),
-                           description=_(u"The title of the portlet"))
+    name = schema.TextLine(
+        title=_(u"Title"),
+        description=_(u"The title of the portlet")
+    )
 
-    username = schema.TextLine(title=_(u"Username"),
-                               description=_(u"The tweets of this user will be shown"))
+    username = schema.TextLine(
+        title=_(u"Username"),
+        description=_(u"The tweets of this user will be shown")
+    )
 
-    count = schema.Int(title=_(u'Number of items to display'),
-                       description=_(u'How many items to list.'),
-                       required=True,
-                       default=5)
+    count = schema.Int(
+        title=_(u'Number of items to display'),
+        description=_(u'How many items to list.'),
+        required=True,
+        default=5
+    )
 
 
 class Assignment(base.Assignment):
@@ -102,11 +108,7 @@ class Renderer(base.Renderer):
         username = self.data.username
         limit = self.data.count
         twapi = twitter.Api()
-        try:
-            return twapi.GetUserTimeline(username)[:limit]
-        except:
-            return []
-            
+        return twapi.GetUserTimeline(username, count=limit)
 
 class AddForm(base.AddForm):
     """Portlet add form"""

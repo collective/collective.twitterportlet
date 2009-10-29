@@ -12,3 +12,5 @@ zcml =
     collective.twitterportlet
     
 Install this portlet into your Plone site using the Add products in Site Setup or through the QuickInstaller. Add Twitter portlets wherever you need, using the 'Manage portlets' interface.
+
+The above 'zcml' step is not required in Plone 3.3+
