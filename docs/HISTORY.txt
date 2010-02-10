@@ -4,6 +4,11 @@ Changelog
 0.6
 ----------------
 
+* The Twitter service is surprisingly often unreachable. Protect against common
+  HTTPErrors and show an unavailable message instead of relying on the common
+  portlet on-error handling.
+  (Hanno Schlichting - @hannosch)
+
 * Removed the empty initialize method.
   (Hanno Schlichting - @hannosch)
 

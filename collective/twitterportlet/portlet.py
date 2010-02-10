@@ -8,6 +8,8 @@ from collective.twitterportlet import TwitterPortletMessageFactory as _
 from plone.memoize.instance import memoize
 import twitter
 import re
+from urllib2 import HTTPError
+
 
 # Match and capture urls
 urlsRegexp = re.compile(r"""
@@ -108,7 +110,11 @@ class Renderer(base.Renderer):
         username = self.data.username
         limit = self.data.count
         twapi = twitter.Api()
-        return twapi.GetUserTimeline(username, count=limit)
+        try:
+            tweets = twapi.GetUserTimeline(username, count=limit)
+        except HTTPError:
+            return None
+        return tweets
 
 class AddForm(base.AddForm):
     """Portlet add form"""
