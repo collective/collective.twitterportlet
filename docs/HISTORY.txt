@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.6
+0.6 - 2010-02-10
 ----------------
 
 * The Twitter service is surprisingly often unreachable. Protect against common
@@ -12,7 +12,7 @@ Changelog
 * Removed the empty initialize method.
   (Hanno Schlichting - @hannosch)
 
-0.5
+0.5 - 2009-10-29
 ----------------
 
 * Changed the limit option to push it through to the API rather than 
@@ -30,25 +30,25 @@ Changelog
   (Ben Glynn - @Open_Comms)
 
 0.4
-----------------
+---
 
 * General bug fixes
   (Ben Mason - @sparcd)
 
 0.3
-----------------
+---
 
 * General bug fixes
   (Ben Mason - @sparcd) 
 
 0.2
-----------------
+---
 
 * Problems with the egg, so repackaged and re-released
   (Ben Mason - @sparcd)
 
 0.1
-----------------
+---
 
 * Initial Release
   (Ben Mason - @sparcd)
