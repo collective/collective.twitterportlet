@@ -11,7 +11,6 @@ setup(name='collective.twitterportlet',
       classifiers=[
         "Framework :: Plone",
         "Programming Language :: Python",
-        "Topic :: Software Development :: Libraries :: Python Modules",
         ],
       keywords='',
       author='Sharkbyte Studios',
