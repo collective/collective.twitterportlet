@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.8 - unreleased
+0.8 - 2010-02-10
 ----------------
 
 * Ignore all URLErrors instead of the more specific HTTPErrors. This catches
