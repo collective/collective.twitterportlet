@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.6
+----------------
+
+* Removed the empty initialize method.
+  (Hanno Schlichting - @hannosch)
+
+
 0.5
 ----------------
 
