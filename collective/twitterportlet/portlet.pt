@@ -2,25 +2,25 @@
   i18n:domain="collective.portlet.twitter"
   tal:define="tweets view/get_tweets">
 
-    <dt class="portletHeader">
-        <span class="portletTopLeft"></span>
-        <tal:block replace="view/title" />
-        <span class="portletTopRight"></span>
-    </dt>
+  <dt class="portletHeader">
+    <span class="portletTopLeft"></span>
+    <tal:block replace="view/title" />
+    <span class="portletTopRight"></span>
+  </dt>
 
-    <tal:block tal:condition="tweets|nothing">
-      <tal:tweets tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime"
-                  tal:repeat="obj tweets">
-        <dd class="portletItem" tal:define="oddrow repeat/obj/odd"
-          tal:attributes="class python:oddrow and 'portletItem even' or 'portletItem odd'">
-          <tal:block replace="structure python:view.expand(obj.text)" />
-          <span class="portletItemDetails">
-            <tal:date content="python:toLocalizedTime(obj.created_at, long_format=1)">
-              May 5
-            </tal:date>
-          </span>
-        </dd>
-      </tal:tweets>
+  <tal:block tal:condition="tweets|nothing">
+    <tal:tweets tal:define="toLocalizedTime nocall:context/@@plone/toLocalizedTime"
+                tal:repeat="obj tweets">
+      <dd class="portletItem" tal:define="oddrow repeat/obj/odd"
+        tal:attributes="class python:oddrow and 'portletItem even' or 'portletItem odd'">
+        <tal:block replace="structure python:view.expand(obj.text)" />
+        <span class="portletItemDetails">
+          <tal:date content="python:toLocalizedTime(obj.created_at, long_format=1)">
+            May 5
+          </tal:date>
+        </span>
+      </dd>
+    </tal:tweets>
   </tal:block>
 
   <tal:block tal:condition="not: tweets|nothing">
