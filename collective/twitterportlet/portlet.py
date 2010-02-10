@@ -8,7 +8,7 @@ from collective.twitterportlet import TwitterPortletMessageFactory as _
 from plone.memoize.instance import memoize
 import twitter
 import re
-from urllib2 import HTTPError
+from urllib2 import URLError
 
 
 # Match and capture urls
@@ -112,7 +112,7 @@ class Renderer(base.Renderer):
         twapi = twitter.Api()
         try:
             tweets = twapi.GetUserTimeline(username, count=limit)
-        except HTTPError:
+        except URLError:
             return None
         return tweets
 

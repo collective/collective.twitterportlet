@@ -4,6 +4,9 @@ Changelog
 0.8 - unreleased
 ----------------
 
+* Ignore all URLErrors instead of the more specific HTTPErrors. This catches
+  problems like 'Connection refused'.
+  (Hanno Schlichting - @hannosch)
 
 0.7 - 2010-02-10
 ----------------
