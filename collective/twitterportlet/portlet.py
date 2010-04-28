@@ -10,6 +10,7 @@ import twitter
 import re
 from urllib2 import URLError
 
+TWITTER_URL = 'http://twitter.com/'
 
 # Match and capture urls
 urlsRegexp = re.compile(r"""
@@ -68,10 +69,17 @@ class ITwitterPortlet(IPortletDataProvider):
     )
 
     count = schema.Int(
-        title=_(u'Number of items to display'),
-        description=_(u'How many items to list.'),
+        title=_(u'number of items to display'),
+        description=_(u'how many items to list.'),
         required=True,
         default=5
+    )
+
+    link_to_profile_url = schema.Bool(
+        title=_(u'Link to user\'s profile?'),
+        description=_(u'If selected, portlet header will link to the user\'s Twitter page.'),
+        required=True,
+        default=True
     )
 
 
@@ -80,10 +88,11 @@ class Assignment(base.Assignment):
 
     implements(ITwitterPortlet)
 
-    def __init__(self, name=u"", username=u"", count=5):
+    def __init__(self, name=u"", username=u"", count=5, link_to_profile_url=True):
         self.name = name
         self.username = username
-        self.count = 5
+        self.count = count
+        self.link_to_profile_url = link_to_profile_url
 
     @property
     def title(self):
@@ -116,6 +125,10 @@ class Renderer(base.Renderer):
             return None
         return tweets
 
+    @memoize
+    def profile_url(self):
+        return TWITTER_URL + self.data.username 
+    
 class AddForm(base.AddForm):
     """Portlet add form"""
 

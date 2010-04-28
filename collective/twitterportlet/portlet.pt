@@ -4,7 +4,11 @@
 
   <dt class="portletHeader">
     <span class="portletTopLeft"></span>
-    <tal:block replace="view/title" />
+    <a href="#"
+       tal:attributes="href view/profile_url"
+       tal:omit-tag="not:view/data/link_to_profile_url">
+         <tal:block replace="view/title" />
+    </a>
     <span class="portletTopRight"></span>
   </dt>
 
