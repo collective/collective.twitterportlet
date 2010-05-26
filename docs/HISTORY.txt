@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.9 - unreleased
+0.9 - 2010-05-26
 ----------------
 
 * Added simple RAM caching of the feed results for at most 100 seconds or the
