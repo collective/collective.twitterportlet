@@ -127,8 +127,8 @@ class Renderer(base.Renderer):
 
     @memoize
     def profile_url(self):
-        return TWITTER_URL + self.data.username 
-    
+        return TWITTER_URL + self.data.username
+
 class AddForm(base.AddForm):
     """Portlet add form"""
 
