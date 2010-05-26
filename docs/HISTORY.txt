@@ -4,6 +4,9 @@ Changelog
 0.9 - unreleased
 ----------------
 
+* Catch and ignore ``TwitterError``.
+  (Hanno Schlichting - @hannosch)
+
 * Adding ability to link to the user's Twitter page as the portlet header.
   (David Breitkreutz - @rockdj)
 

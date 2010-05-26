@@ -1,14 +1,17 @@
-from zope.interface import implements
-from plone.portlets.interfaces import IPortletDataProvider
-from plone.app.portlets.portlets import base
-from zope import schema
-from zope.formlib import form
-from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from collective.twitterportlet import TwitterPortletMessageFactory as _
-from plone.memoize.instance import memoize
-import twitter
 import re
 from urllib2 import URLError
+
+import twitter
+from plone.app.portlets.portlets import base
+from plone.memoize.instance import memoize
+from plone.portlets.interfaces import IPortletDataProvider
+from zope.formlib import form
+from zope.interface import implements
+from zope import schema
+from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+
+from collective.twitterportlet import TwitterPortletMessageFactory as _
+
 
 TWITTER_URL = 'http://twitter.com/'
 
@@ -55,6 +58,7 @@ def expand_tweet(str):
     str = re.sub(emailRegexp, '<a href="mailto:\g<1>">\g<1></a>', str)
     return str
 
+
 class ITwitterPortlet(IPortletDataProvider):
     """A twitter portlet"""
 
@@ -98,6 +102,7 @@ class Assignment(base.Assignment):
     def title(self):
         return _(u"Twitter")
 
+
 class Renderer(base.Renderer):
     """Portlet renderer"""
 
@@ -121,13 +126,14 @@ class Renderer(base.Renderer):
         twapi = twitter.Api()
         try:
             tweets = twapi.GetUserTimeline(username, count=limit)
-        except URLError:
+        except (URLError, twitter.TwitterError):
             return None
         return tweets
 
     @memoize
     def profile_url(self):
         return TWITTER_URL + self.data.username
+
 
 class AddForm(base.AddForm):
     """Portlet add form"""
