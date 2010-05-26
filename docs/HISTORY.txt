@@ -4,6 +4,9 @@ Changelog
 0.9 - unreleased
 ----------------
 
+* Added logging on the info level to all exception cases.
+  (Hanno Schlichting - @hannosch)
+
 * Handle the unresponsive twitter better by using a timeout on connections,
   as advised in http://code.google.com/p/python-twitter/issues/detail?id=92.
   (Hanno Schlichting - @hannosch)

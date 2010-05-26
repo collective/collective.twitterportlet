@@ -1,3 +1,4 @@
+import logging
 import re
 import socket
 from urllib2 import URLError
@@ -48,6 +49,8 @@ emailRegexp = re.compile(r"""
     """, re.VERBOSE|re.IGNORECASE)
 
 DEFAULT_TIMEOUT = socket.getdefaulttimeout()
+TWITTER_TIMEOUT = 15.74 # seconds as floating point number
+logger = logging.getLogger('collective.twitterportlet')
 
 
 def expand_tweet(str):
@@ -136,14 +139,17 @@ class Renderer(base.Renderer):
         # back on the global timeout at import time. Using a thread lock
         # won't help, as other code in other threads could change the same
         # global value
-        if timeout == 61.3:
+        if timeout == TWITTER_TIMEOUT:
             timeout = DEFAULT_TIMEOUT
+            logger.warning('conflict in socket default timeout, resetting '
+                           'default timeout to %s' % DEFAULT_TIMEOUT)
         try:
-            socket.setdefaulttimeout(61.3) # seconds as floating point number
+            socket.setdefaulttimeout(TWITTER_TIMEOUT)
             twapi = twitter.Api()
             try:
                 tweets = twapi.GetUserTimeline(username, count=limit)
             except (URLError, twitter.TwitterError, socket.timeout):
+                logger.info('Error while fetching data.', exc_info=True)
                 tweets = None
         finally:
             socket.setdefaulttimeout(timeout)
