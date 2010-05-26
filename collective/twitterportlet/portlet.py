@@ -93,6 +93,8 @@ class Assignment(base.Assignment):
 
     implements(ITwitterPortlet)
 
+    link_to_profile_url = True
+
     def __init__(self, name=u"", username=u"", count=5,
                  link_to_profile_url=True):
         self.name = name
