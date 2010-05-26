@@ -53,8 +53,10 @@ def expand_tweet(str):
        and returns a hyperlinked string."""
 
     str = re.sub(urlsRegexp, '<a href="\g<1>">\g<1></a>', str)
-    str = re.sub(hashRegexp, '<a href="http://twitter.com/search?q=%23\g<1>">#\g<1></a>', str)
-    str = re.sub(atRegexp, '<a href="http://twitter.com/\g<1>">@\g<1></a>', str)
+    str = re.sub(hashRegexp,
+        '<a href="http://twitter.com/search?q=%23\g<1>">#\g<1></a>', str)
+    str = re.sub(atRegexp,
+        '<a href="http://twitter.com/\g<1>">@\g<1></a>', str)
     str = re.sub(emailRegexp, '<a href="mailto:\g<1>">\g<1></a>', str)
     return str
 
@@ -64,27 +66,24 @@ class ITwitterPortlet(IPortletDataProvider):
 
     name = schema.TextLine(
         title=_(u"Title"),
-        description=_(u"The title of the portlet")
-    )
+        description=_(u"The title of the portlet"))
 
     username = schema.TextLine(
         title=_(u"Username"),
-        description=_(u"The tweets of this user will be shown")
-    )
+        description=_(u"The tweets of this user will be shown"))
 
     count = schema.Int(
         title=_(u'number of items to display'),
         description=_(u'how many items to list.'),
         required=True,
-        default=5
-    )
+        default=5)
 
     link_to_profile_url = schema.Bool(
         title=_(u'Link to user\'s profile?'),
-        description=_(u'If selected, portlet header will link to the user\'s Twitter page.'),
+        description=_(u"If selected, portlet header will link to the "
+                      u"user's Twitter page."),
         required=True,
-        default=True
-    )
+        default=True)
 
 
 class Assignment(base.Assignment):
@@ -92,7 +91,8 @@ class Assignment(base.Assignment):
 
     implements(ITwitterPortlet)
 
-    def __init__(self, name=u"", username=u"", count=5, link_to_profile_url=True):
+    def __init__(self, name=u"", username=u"", count=5,
+                 link_to_profile_url=True):
         self.name = name
         self.username = username
         self.count = count
