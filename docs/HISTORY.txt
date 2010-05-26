@@ -4,6 +4,10 @@ Changelog
 0.9 - unreleased
 ----------------
 
+* Handle the unresponsive twitter better by using a timeout on connections,
+  as advised in http://code.google.com/p/python-twitter/issues/detail?id=92.
+  (Hanno Schlichting - @hannosch)
+
 * Remove memoize overhead for methods that are only called once.
   (Hanno Schlichting - @hannosch)
 

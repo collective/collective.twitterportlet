@@ -1,4 +1,5 @@
 import re
+import socket
 from urllib2 import URLError
 
 import twitter
@@ -45,6 +46,8 @@ emailRegexp = re.compile(r"""
     # Email at start of string or after space
     (?:^|(?<=\s))([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4})\b
     """, re.VERBOSE|re.IGNORECASE)
+
+DEFAULT_TIMEOUT = socket.getdefaulttimeout()
 
 
 def expand_tweet(str):
@@ -121,11 +124,27 @@ class Renderer(base.Renderer):
     def get_tweets(self):
         username = self.data.username
         limit = self.data.count
-        twapi = twitter.Api()
+        # Ugly workaround for a missing timeout handling in the
+        # python-twitter library, see:
+        # http://code.google.com/p/python-twitter/issues/detail?id=92
+        timeout = socket.getdefaulttimeout()
+        # Try to deal with multi-threading in some basic crude way.
+        # If we get our own "marker timeout", this code is called in a
+        # different thread before the timeout could be reset again. Fall
+        # back on the global timeout at import time. Using a thread lock
+        # won't help, as other code in other threads could change the same
+        # global value
+        if timeout == 61.3:
+            timeout = DEFAULT_TIMEOUT
         try:
-            tweets = twapi.GetUserTimeline(username, count=limit)
-        except (URLError, twitter.TwitterError):
-            return None
+            socket.setdefaulttimeout(61.3) # seconds as floating point number
+            twapi = twitter.Api()
+            try:
+                tweets = twapi.GetUserTimeline(username, count=limit)
+            except (URLError, twitter.TwitterError, socket.timeout):
+                tweets = None
+        finally:
+            socket.setdefaulttimeout(timeout)
         return tweets
 
     def profile_url(self):
