@@ -3,7 +3,6 @@ from urllib2 import URLError
 
 import twitter
 from plone.app.portlets.portlets import base
-from plone.memoize.instance import memoize
 from plone.portlets.interfaces import IPortletDataProvider
 from zope.formlib import form
 from zope.interface import implements
@@ -119,7 +118,6 @@ class Renderer(base.Renderer):
     def expand(self, str):
         return expand_tweet(str)
 
-    @memoize
     def get_tweets(self):
         username = self.data.username
         limit = self.data.count
@@ -130,7 +128,6 @@ class Renderer(base.Renderer):
             return None
         return tweets
 
-    @memoize
     def profile_url(self):
         return TWITTER_URL + self.data.username
 

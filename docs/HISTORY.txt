@@ -4,6 +4,9 @@ Changelog
 0.9 - unreleased
 ----------------
 
+* Remove memoize overhead for methods that are only called once.
+  (Hanno Schlichting - @hannosch)
+
 * Catch and ignore ``TwitterError``.
   (Hanno Schlichting - @hannosch)
 
