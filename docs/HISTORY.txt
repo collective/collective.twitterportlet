@@ -4,6 +4,10 @@ Changelog
 0.9 - unreleased
 ----------------
 
+* Added simple RAM caching of the feed results for at most 100 seconds or the
+  cache timeout of the ram cache.
+  (Hanno Schlichting - @hannosch)
+
 * Added logging on the info level to all exception cases.
   (Hanno Schlichting - @hannosch)
 

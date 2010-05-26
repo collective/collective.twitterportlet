@@ -1,10 +1,12 @@
 import logging
 import re
 import socket
+import time
 from urllib2 import URLError
 
 import twitter
 from plone.app.portlets.portlets import base
+from plone.memoize import ram
 from plone.portlets.interfaces import IPortletDataProvider
 from zope.formlib import form
 from zope.interface import implements
@@ -64,6 +66,13 @@ def expand_tweet(str):
         '<a href="http://twitter.com/\g<1>">@\g<1></a>', str)
     str = re.sub(emailRegexp, '<a href="mailto:\g<1>">\g<1></a>', str)
     return str
+
+
+def _render_cachekey(fun, self):
+    # raise ram.DontCache
+    key = self.data.username + str(self.data.count)
+    key += str(int(time.time()) / 100 * 100) # cache for at most 100 seconds
+    return key
 
 
 class ITwitterPortlet(IPortletDataProvider):
@@ -126,6 +135,7 @@ class Renderer(base.Renderer):
     def expand(self, str):
         return expand_tweet(str)
 
+    @ram.cache(_render_cachekey)
     def get_tweets(self):
         username = self.data.username
         limit = self.data.count
