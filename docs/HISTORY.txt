@@ -4,6 +4,10 @@ Changelog
 1.0 - unreleased
 ----------------
 
+* When having a tweet with an link containing a mixture of "&?=" the regular 
+  expression in expand_tweet creates invalid html. A failing test for that is 
+  added.
+  (Pelle Krøgholt - @pellekrogholt - irc: pelle_)
 
 0.9 - 2010-05-26
 ----------------
