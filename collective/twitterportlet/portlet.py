@@ -41,7 +41,7 @@ hashRegexp = re.compile(r"""
 atRegexp = re.compile(r"""
     # At symbol at start of string or after space, followed by at least one
     # alphanumeric or dash
-    (?:^|(?<=\s))@([A-Za-z0-9\-]+)
+    (?:^|(?<=\s))@([A-Za-z0-9\-_]+)
     """, re.VERBOSE)
 
 # Match and capture email address
