@@ -24,9 +24,9 @@ urlsRegexp = re.compile(r"""
     # Protocol
     http://
     # Alphanumeric, dash, slash or dot
-    [A-Za-z0-9\-/.]*
+    [A-Za-z0-9\-/?&=#!.]*
     # Don't end with a dot
-    [A-Za-z0-9\-/]+
+    [A-Za-z0-9\-/?&=#!]+
     )
     """, re.VERBOSE)
 

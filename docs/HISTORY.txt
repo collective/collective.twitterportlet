@@ -9,6 +9,10 @@ Changelog
   added.
   (Pelle Krøgholt - @pellekrogholt - irc: pelle_)
 
+* Generate proper links for URLs that contain the symbols "&?=#!". This fixes
+  the failing test mentioned above.
+  (Emanuel Sartor - @esartor)
+
 * Added ability to include native retweets in addition to the standard stream
   of tweets.
   (Emanuel Sartor - @esartor)

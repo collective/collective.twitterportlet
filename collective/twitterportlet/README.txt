@@ -41,15 +41,20 @@ Now a reply with a URL:
     >>> expand_tweet(tweet)
     '<a href="http://twitter.com/testuser">@testuser</a> check out this <a href="http://www.google.com">http://www.google.com</a>'
 
+Now a tweet with a URL followed by a dot:
+
+    >>> tweet = """Check out this http://www.google.com."""
+    >>> expand_tweet(tweet)
+    'Check out this <a href="http://www.google.com">http://www.google.com</a>.'
+
 Now a tweet with an email:
 
     >>> tweet = """Mail me username@email.com"""
     >>> expand_tweet(tweet)
     'Mail me <a href="mailto:username@email.com">username@email.com</a>'
 
-Now a tweet with link to a photo album from the Plone business facebook page:
+Now a tweet with link to a photo album from the Plone business Facebook page:
 
     >>> tweet = """http://www.facebook.com/pages/Plone/8385399421?ref=ts&v=wall#!/album.php?aid=-3&id=8385399421"""
     >>> expand_tweet(tweet)
     '<a href="http://www.facebook.com/pages/Plone/8385399421?ref=ts&v=wall#!/album.php?aid=-3&id=8385399421">http://www.facebook.com/pages/Plone/8385399421?ref=ts&v=wall#!/album.php?aid=-3&id=8385399421</a>'
-
