@@ -7,7 +7,7 @@ Changelog
 * When having a tweet with an link containing a mixture of "&?=" the regular 
   expression in expand_tweet creates invalid html. A failing test for that is 
   added.
-  (Pelle Krøgholt - @pellekrogholt - irc: pelle_)
+  (Pelle Krøgholt - @pellekrogholt - irc: `pelle_`)
 
 * Generate proper links for URLs that contain the symbols "&?=#!". This fixes
   the failing test mentioned above.
