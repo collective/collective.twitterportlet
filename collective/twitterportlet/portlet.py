@@ -99,6 +99,14 @@ class ITwitterPortlet(IPortletDataProvider):
         required=True,
         default=True)
 
+    include_retweets = schema.Bool(
+        title=_(u'Include retweets?'),
+        description=_('If selected, the portlet will show native retweets '
+                      '(if they exist) in addition to the standard stream of '
+                      'tweets.'),
+        required=True,
+        default=False)
+
 
 class Assignment(base.Assignment):
     """Portlet assignment"""
@@ -106,13 +114,15 @@ class Assignment(base.Assignment):
     implements(ITwitterPortlet)
 
     link_to_profile_url = True
+    include_retweets = False
 
     def __init__(self, name=u"", username=u"", count=5,
-                 link_to_profile_url=True):
+                 link_to_profile_url=True, include_retweets=False):
         self.name = name
         self.username = username
         self.count = count
         self.link_to_profile_url = link_to_profile_url
+        self.include_retweets = include_retweets
 
     @property
     def title(self):
@@ -139,6 +149,7 @@ class Renderer(base.Renderer):
     def get_tweets(self):
         username = self.data.username
         limit = self.data.count
+        include_retweets = self.data.include_retweets
         # Ugly workaround for a missing timeout handling in the
         # python-twitter library, see:
         # http://code.google.com/p/python-twitter/issues/detail?id=92
@@ -157,7 +168,8 @@ class Renderer(base.Renderer):
             socket.setdefaulttimeout(TWITTER_TIMEOUT)
             twapi = twitter.Api()
             try:
-                tweets = twapi.GetUserTimeline(username, count=limit)
+                tweets = twapi.GetUserTimeline(username, count=limit,
+                    include_rts=include_retweets)
             except (URLError, twitter.TwitterError, socket.timeout):
                 logger.info('Error while fetching data.', exc_info=True)
                 tweets = None

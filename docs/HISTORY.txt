@@ -9,6 +9,10 @@ Changelog
   added.
   (Pelle Krøgholt - @pellekrogholt - irc: pelle_)
 
+* Added ability to include native retweets in addition to the standard stream
+  of tweets.
+  (Emanuel Sartor - @esartor)
+
 0.9 - 2010-05-26
 ----------------
 
