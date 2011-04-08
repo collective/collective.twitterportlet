@@ -23,7 +23,7 @@ setup(name='collective.twitterportlet',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'python-twitter',
+          'python-twitter>=0.8.1',
           'simplejson'
       ],
       entry_points="""
